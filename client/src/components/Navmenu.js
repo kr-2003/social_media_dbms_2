@@ -8,6 +8,7 @@ import { AppContext } from "../App";
 import Button from "./Button";
 import Axios from "axios";
 import SearchBar from "./SearchBar";
+import "./navey.css";
 function Navmenu() {
   const { loginStatus, user, setUser } = useContext(AppContext);
   const [username, setUsername] = useState("");
@@ -52,27 +53,107 @@ function Navmenu() {
   // console.log(userData);
   return (
     <>
-      <div className="shadow-md w-full sticky top-0 left-0 bg-white opacity-100 z-50">
-        <div className="md:flex items-center justify-between bg-white py-4 md:px-10 px-7">
-          <div className="font-bold text-2xl cursor-pointer flex items-center text-gray-800">
-            <span className="text-3xl text-indigo-600 mr-1">
-              <ion-icon name="logo-wechat"></ion-icon>
-              <h1 className="inline">Socialize</h1>
-            </span>
-          </div>
-          <div
-            onClick={() => setOpen(!open)}
-            className="text-3xl absolute right-8 top-6 cursor-pointer md:hidden"
-          >
-            <ion-icon name={open ? "close" : "menu"}></ion-icon>
-            {/* <ion-icon name="close-circle-outline"></ion-icon> */}
-          </div>
-          <ul
-            className={`md:flex md:items-center md:pb-0 pb-12 absolute md:static z-0 bg-white md:z-50 z-50 left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-200 ease-in ${
-              open ? "top-19.5" : "top-[-500px]"
-            }`}
-          >
-            {links.map((links) => (
+    <div>
+    <div class="area"></div><nav class="main-menu">
+            <ul>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-home fa-2x"></i>
+                        <span class="nav-text">
+                            AK
+                        </span>
+                    </a>
+                  
+                </li>
+                <li class="has-subnav">
+                    <a href="#">
+                        <i class="fa fa-laptop fa-2x"></i>
+                        <span class="nav-text">
+                            Stars Components
+                        </span>
+                    </a>
+                    
+                </li>
+                <li class="has-subnav">
+                    <a href="#">
+                       <i class="fa fa-list fa-2x"></i>
+                        <span class="nav-text">
+                            Forms
+                        </span>
+                    </a>
+                    
+                </li>
+                <li class="has-subnav">
+                    <a href="#">
+                       <i class="fa fa-folder-open fa-2x"></i>
+                        <span class="nav-text">
+                            Pages
+                        </span>
+                    </a>
+                   
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-bar-chart-o fa-2x"></i>
+                        <span class="nav-text">
+                            Graphs and Statistics
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-font fa-2x"></i>
+                        <span class="nav-text">
+                           Quotes
+                        </span>
+                    </a>
+                </li>
+                <li>
+                   <a href="#">
+                       <i class="fa fa-table fa-2x"></i>
+                        <span class="nav-text">
+                            Tables
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                   <a href="#">
+                        <i class="fa fa-map-marker fa-2x"></i>
+                        <span class="nav-text">
+                            Maps
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/Register" value={"REGISTER"}>
+                    {/* <Button value={"REGISTER"}></Button> */}
+                       <i class="fa fa-info fa-2x"></i>
+                        <span class="nav-text">
+                        Registration
+                        </span>
+                    </a>
+                </li>
+                {/* <li> */}
+                    {/* <a href="/Login" value={"LOGIN"}> */}
+                    {/* <Button value={"REGISTER"}></Button> */}
+                       {/* <i class="fa fa-info fa-2x"></i> */}
+                        {/* <span class="nav-text"> */}
+                        {/* Login */}
+                        {/* </span> */}
+                    {/* </a> */}
+                {/* </li> */}
+            </ul>
+            <li>
+            <i class="fa fa-info fa-2x"></i>
+            <span class="nav-text">
+            
+            {/* <span class="nav-text"> */}
+            <SearchBar placeholder={`Search users`} data={userData}></SearchBar>
+                        {/* </span> */}
+            
+                        </span>
+                {/* {links.map((links) => (
               <li key={links.name} className="md:ml-8 text-xl md:my-0 my-7">
                 <a
                   href={links.link}
@@ -81,31 +162,22 @@ function Navmenu() {
                   {links.name}
                 </a>
               </li>
-            ))}
-            <SearchBar placeholder={`Search users`} data={userData}></SearchBar>
-            {loginStatus && (
-              <>
-                <a href={`/user/${user.id}`}>
-                  <Button value={username}></Button>
-                </a>
-                <a href="/login" onClick={logoutHandler}>
-                  <Button value={"LOGOUT"}></Button>
-                </a>
-              </>
-            )}
-            {!loginStatus && (
-              <>
-                <a href="/login">
-                  <Button value={"LOGIN"}></Button>
-                </a>
-                <a href="/register">
-                  <Button value={"REGISTER"}></Button>
-                </a>
-              </>
-            )}
-          </ul>
-        </div>
-      </div>
+            ))} */}
+            
+                </li>
+
+            <ul class="logout">
+                <li>
+                   <a href="/login" value={"LOGOUT"} onClick={logoutHandler}>
+                         <i class="fa fa-power-off fa-2x"></i>
+                        <span class="nav-text">
+                            Logout
+                        </span>
+                    </a>
+                </li>  
+            </ul>
+        </nav>
+    </div>
     </>
   );
 }

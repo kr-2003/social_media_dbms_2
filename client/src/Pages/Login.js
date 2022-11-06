@@ -7,6 +7,7 @@ import Axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 
+
 function Login() {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
@@ -45,30 +46,26 @@ function Login() {
   if (loginStatus) navigate("/");
 
   return (
-    <div className="h-screen w-screen flex justify-center items-center">
-      <div className="login h-96 w-80 align-content-center bg-zinc-300 p-10 bg-opacity-25 rounded-md">
-        <h1 className="text-5xl mb-8">Login</h1>
-        <Stack spacing={3}>
-          <TextField
-            className="input-fields"
-            label="Username"
-            variant="standard"
-            type="text"
-            onChange={usernameHandler}
-            value={username}
-          />
-          <TextField
-            className="input-fields"
-            label="Password"
-            variant="standard"
-            type="password"
-            onChange={passwordHandler}
-            value={password}
-          />
-          <Button variant="contained" size="large" onClick={login}>
-            Login
-          </Button>
-        </Stack>
+    <div class="main">
+      <div class="login-box">
+        <h1>LOGIN</h1>
+        <form>
+          <div class="user-box">
+            <input type="text" name="" required="" onChange={usernameHandler} value={username}/>
+            <label>Username</label>
+          </div>
+          <div class="user-box">
+            <input type="password" name="" required="" onChange={passwordHandler} value={password}/>
+            <label>Password</label>
+          </div>
+          <button onClick={login}>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            LOGIN
+          </button>
+        </form>
       </div>
     </div>
   );
