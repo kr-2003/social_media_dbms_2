@@ -9,6 +9,7 @@ import Button from "./Button";
 import Axios from "axios";
 import SearchBar from "./SearchBar";
 import { useNavigate } from "react-router-dom"
+import "./nav.css";
 function Navmenu() {
   const { loginStatus, user, setUser } = useContext(AppContext);
   const [username, setUsername] = useState("");
@@ -54,12 +55,12 @@ function Navmenu() {
   // console.log(userData);
   return (
     <>
-      <div className="shadow-md w-full sticky top-0 left-0 bg-white opacity-100 z-50">
-        <div className="md:flex items-center justify-between bg-white py-4 md:px-10 px-7">
+      <div className="shadow-md w-full sticky top-0 left-0 colo opacity-100 z-50">
+        <div className="md:flex items-center justify-between colo py-4 md:px-10 px-7">
           <div className="font-bold text-2xl cursor-pointer flex items-center text-gray-800">
             <span className="text-3xl text-cyan-900 mr-1">
               <ion-icon name="logo-wechat"></ion-icon>
-              <h1 className="inline">AK</h1>
+              <h1 className="inline ii">AK</h1>
             </span>
           </div>
           <div
@@ -70,7 +71,7 @@ function Navmenu() {
             {/* <ion-icon name="close-circle-outline"></ion-icon> */}
           </div>
           <ul
-            className={`md:flex md:items-center md:pb-0 pb-12 absolute md:static z-0 bg-white md:z-50 z-50 left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-200 ease-in ${open ? "top-19.5" : "top-[-500px]"
+            className={`md:flex md:items-center md:pb-0 pb-12 absolute md:static z-0 colo md:z-50 z-50 left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-200 ease-in ${open ? "top-19.5" : "top-[-500px]"
               }`}
           >
             {links.map((links) => (

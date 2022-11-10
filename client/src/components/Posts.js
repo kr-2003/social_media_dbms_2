@@ -180,7 +180,7 @@ function Posts(props) {
   return (
     <>
       <div className="relative text-center justify-center border-solid border-2">
-        <h1 className="text-4xl mb-4 mt-8 mb-6">YOUR POSTS</h1>
+        <h1 className="text-4xl mb-4 mt-8 mb-6">POSTS</h1>
         {posts.map((post) => (
           <motion.div key={post.id} 
           initial={{x: -1, opacity: 0 }}
@@ -207,6 +207,7 @@ function Posts(props) {
                 <div className="inline-grid grid-cols-3 gap-3">
                   {!like.some((item) => item.post_id === post.id) && (
                     <button onClick={() => likeHandler(post.id)}>
+                      
                       <ion-icon size="large" name="heart-outline"></ion-icon>
                     </button>
                   )}

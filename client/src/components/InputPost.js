@@ -8,6 +8,7 @@ import uuid from "react-uuid";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router-dom";
+import "./Posts.css";
 
 const resolveAfter3Sec = new Promise(resolve => setTimeout(resolve, 3000));
 
@@ -93,9 +94,9 @@ export default function InputPost() {
           aria-label="maximum height"
           placeholder="Enter text..."
           value={post}
-          style={{ width: 1000, height: 200 }}
+          style={{ width: 640, height: 300 }}
           onChange={postHandler}
-          className="border-solid border-2 focus:outline-none p-3 rounded-xl"
+          className="border-solid border-2 focus:outline-none p-3 rounded-xl bgg text-white"
         />
         <div className="justify-center text-center ml-auto">
           <input
@@ -110,7 +111,7 @@ export default function InputPost() {
             onChange={imageHandler}
           />
           <button
-            className="bg-sky-900 text-white fonr-[Poppins] py-2 px-6 rounded md:ml-8 hover:bg-cyan-800 duration-500 md:mr-0 mr-7"
+            className="bg-sky-900 text-white fonr-[Poppins] py-2 px-6 rounded-3xl md:ml-8 hover:bg-cyan-800 duration-500 md:mr-0 mr-7"
             onClick={savePost}
           >
             POST
