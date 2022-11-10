@@ -57,9 +57,9 @@ function Navmenu() {
       <div className="shadow-md w-full sticky top-0 left-0 bg-white opacity-100 z-50">
         <div className="md:flex items-center justify-between bg-white py-4 md:px-10 px-7">
           <div className="font-bold text-2xl cursor-pointer flex items-center text-gray-800">
-            <span className="text-3xl text-indigo-600 mr-1">
+            <span className="text-3xl text-cyan-900 mr-1">
               <ion-icon name="logo-wechat"></ion-icon>
-              <h1 className="inline">Socialize</h1>
+              <h1 className="inline">AK</h1>
             </span>
           </div>
           <div

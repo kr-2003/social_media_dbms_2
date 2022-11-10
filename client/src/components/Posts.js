@@ -180,14 +180,14 @@ function Posts(props) {
   return (
     <>
       <div className="relative text-center justify-center border-solid border-2">
-        {/* <h1 className="text-4xl mb-4 mt-8 mb-6">YOUR POSTS</h1> */}
+        <h1 className="text-4xl mb-4 mt-8 mb-6">YOUR POSTS</h1>
         {posts.map((post) => (
           <motion.div key={post.id} 
           initial={{x: -1, opacity: 0 }}
           animate={{x: 0, opacity: 1 }}
           exit={{ opacity: 0 }}>
-            <div className="mt-2 container mx-auto text-left md:w-1/2 md:min-h-10 md:max-h-50 border-solid border-2 mb-10 p-2 rounded-lg">
-              <div className="h-10 bg-slate-200 p-2 flex items-center flow-root">
+            <div className="mt-2 bgg container mx-auto text-left md:w-1/2 md:min-h-10 md:max-h-50 border-solid border-2 mb-10 p-2 rounded-lg">
+              <div className="h-10 bg-slate-300 p-2 flex items-center flow-root">
                 <a
                   className="text-md font-semibold float-left"
                   href={`/user/${post.user_id}`}
@@ -239,23 +239,24 @@ function Posts(props) {
                 </div>
               </div>
               <div className="container mx-auto md:h-1/2">
-                {post.num_likes && (<span className="text-sm mb-6">{post.num_likes} likes</span>)}
+                {post.num_likes && (<span className="text-sm mb-6 text-slate-200">{post.num_likes} likes</span>)}
 
-                <p className="mt-6">{post.post_content}</p>
+                <p className="mt-6 text-white">{post.post_content}</p>
                 {user.id === post.user_id && (
                   <div className="mt-5">
                     <button
-                      className="bg-red-800 text-white fonr-[Poppins] py-2 px-6 rounded-3xl md:ml-0 hover:bg-red-400 duration-500"
-                      onClick={deletePost.bind(this, post.id)}
-                    >
-                      Delete
-                    </button>
-                    <button
-                      className="bg-indigo-600 text-white fonr-[Poppins] py-2 px-6 rounded-3xl md:ml-4 hover:bg-indigo-400 duration-500"
+                      className="bg-sky-900 text-white fonr-[Poppins] py-2 px-6 rounded-3xl md:ml-0 hover:bg-indigo-400 duration-500"
                       onClick={handleOpen.bind(this, post)}
                     >
                       Edit
                     </button>
+                    <button
+                      className="bg-pink-600 text-white fonr-[Poppins] py-2 px-6 rounded-3xl md:ml-4 hover:bg-red-400 duration-500"
+                      onClick={deletePost.bind(this, post.id)}
+                    >
+                      Delete
+                    </button>
+                    
 
                     <Modal
                       open={open}

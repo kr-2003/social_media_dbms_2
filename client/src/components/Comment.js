@@ -36,12 +36,12 @@ function Comment(props) {
         ></input>
         <button
           onClick={saveComment}
-          className="ml-auto bg-indigo-600 text-white fonr-[Poppins] py-2 px-6 rounded hover:bg-indigo-400 duration-500 mt-3 h-10"
+          className="ml-auto bg-cyan-900 text-white fonr-[Poppins] py-2 px-6 rounded hover:bg-cyan-800 duration-500 mt-3 h-10"
         >
           Comment
         </button>
       </div>
-      <h3>COMMENTS</h3>
+      <h3 className="text-slate-300">COMMENTS</h3>
       <Comments post_id={props.post_id}></Comments>
     </div>
   );

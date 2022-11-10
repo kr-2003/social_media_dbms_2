@@ -6,9 +6,7 @@ import Button from "@mui/material/Button";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
-import { motion } from "framer-motion";
-import 'react-toastify/dist/ReactToastify.css';
-import { toast } from "react-toastify";
+
 
 function Login() {
   const navigate = useNavigate();
@@ -30,31 +28,9 @@ function Login() {
       .then((response) => {
         if (!response.data.auth) {
           setLoginStatus(false);
-          toast.warn('Wrong username or password!!', {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-            });
-            setUsername("");
-            setPassword("");
         } else {
           console.log(response.data);
           setLoginStatus(true);
-          toast.success('Login Successfull!!', {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-          });
         }
         console.log(response);
       })
@@ -62,47 +38,37 @@ function Login() {
         console.log(err);
       });
 
-    // setLoginStatus(true);
+    setLoginStatus(true);
     navigate("/");
-    
-    // navigate("/");
+    navigate("/");
   };
 
   if (loginStatus) navigate("/");
-  else {
-    return (
-      <motion.div className="h-screen w-screen flex justify-center items-center" initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}>
-        <div className="login h-96 w-80 align-content-center bg-zinc-300 p-10 bg-opacity-25 rounded-md">
-          <h1 className="text-5xl mb-8">Login</h1>
-          <Stack spacing={3}>
-            <TextField
-              className="input-fields"
-              label="Username"
-              variant="standard"
-              type="text"
-              onChange={usernameHandler}
-              value={username}
-            />
-            <TextField
-              className="input-fields"
-              label="Password"
-              variant="standard"
-              type="password"
-              onChange={passwordHandler}
-              value={password}
-            />
-            <Button variant="contained" size="large" onClick={login}>
-              Login
-            </Button>
-          </Stack>
-        </div>
-      </motion.div>
-    );
-  }
 
-
+  return (
+    <div class="main">
+      <div class="login-box">
+        <h1>LOGIN</h1>
+        <form>
+          <div class="user-box">
+            <input type="text" name="" required="" onChange={usernameHandler} value={username}/>
+            <label>Username</label>
+          </div>
+          <div class="user-box">
+            <input type="password" name="" required="" onChange={passwordHandler} value={password}/>
+            <label>Password</label>
+          </div>
+          <button onClick={login}>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            LOGIN
+          </button>
+        </form>
+      </div>
+    </div>
+  );
 }
 
 export default Login;

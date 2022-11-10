@@ -104,13 +104,13 @@ export default function InputPost() {
                        file:py-2 file:px-4
                        file:rounded-full file:border-0
                        file:text-sm file:font-semibold
-                       file:bg-violet-50 file:text-violet-700
-                       hover:file:bg-violet-100 justify-center
+                       file:bg-violet-50 file:text-slate-800
+                       hover:file:bg-slate-200 justify-center
                       "
             onChange={imageHandler}
           />
           <button
-            className="bg-indigo-600 text-white fonr-[Poppins] py-2 px-6 rounded md:ml-8 hover:bg-indigo-400 duration-500 md:mr-0 mr-7"
+            className="bg-sky-900 text-white fonr-[Poppins] py-2 px-6 rounded md:ml-8 hover:bg-cyan-800 duration-500 md:mr-0 mr-7"
             onClick={savePost}
           >
             POST
