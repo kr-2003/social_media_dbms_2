@@ -14,7 +14,7 @@ import io from "socket.io-client";
 import AnimatedRoutes from "./components/AnimatedRoutes";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Homepage from "./Pages/Homepage";
+// import Homepage from "./Pages/Homepage";
 const socket = io.connect("http://localhost:3001");
 
 
