@@ -403,9 +403,11 @@ app.get("/get_msgs/:sender/:receiver", (req, res)=>{
 
 app.post("/upload/image/:id", (req, res)=>{
   const {id} = req.params;
-  db.query("UPDATE users SET profile_pic = ? WHERE id = ?", [req.body.profile_pic, id], (err, result)=>{
+  db.query("UPDATE users SET profile_pic_url = ? WHERE id = ?", [req.body.profile_pic_url, id], (err, result)=>{
     if(err) console.log(err);
-    else console.log(result);
+    else {
+      // 
+    }
   })
 })
 

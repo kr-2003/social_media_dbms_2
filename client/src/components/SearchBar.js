@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./SearchBar.css";
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
-
+import {motion} from "framer-motion";
 function SearchBar({ placeholder, data }) {
   const [filteredData, setFilteredData] = useState([]);
   const [wordEntered, setWordEntered] = useState("");
@@ -35,16 +35,20 @@ function SearchBar({ placeholder, data }) {
           value={wordEntered}
           onChange={handleFilter}
         />
-        <div className="searchIcon">
+        <motion.div className="searchIcon" initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}>
           {filteredData.length === 0 ? (
             <SearchIcon />
           ) : (
             <CloseIcon id="clearBtn" onClick={clearInput} />
           )}
-        </div>
+        </motion.div>
       </div>
       {filteredData.length != 0 && (
-        <div className="dataResult">
+        <motion.div className="dataResult" initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}>
           {filteredData.slice(0, 15).map((value, key) => {
             return (
               <a className="dataItem" href={`/user/${value.id}`} target="_blank">
@@ -52,7 +56,7 @@ function SearchBar({ placeholder, data }) {
               </a>
             );
           })}
-        </div>
+        </motion.div>
       )}
     </div>
   );

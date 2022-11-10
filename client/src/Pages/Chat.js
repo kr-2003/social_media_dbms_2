@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import ScrollToBottom from "react-scroll-to-bottom";
 import Axios from "axios";
 import { useParams } from "react-router-dom";
-import {useLocation} from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import CircularJSON from "circular-json";
 import io from "socket.io-client";
-import {motion} from "framer-motion"
+import { motion } from "framer-motion"
 const socket = io.connect("http://localhost:3001");
 
 function Chat() {
@@ -17,7 +17,7 @@ function Chat() {
   const receiver = location.state.receiver;
   const room = location.state.room;
   // console.log(socket);
-  useEffect(()=>{
+  useEffect(() => {
     socket.emit("join_room", room);
   }, [])
 
@@ -49,15 +49,15 @@ function Chat() {
       console.log(err);
     })
 
-    
+
   }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     console.log("Tanwish is legend!!")
     console.log(pastMsgs)
-    for(let i = 0; i < pastMsgs.length; i++){
+    for (let i = 0; i < pastMsgs.length; i++) {
       const msg = pastMsgs[i];
-      
+
       const messageData = {
         room: room,
         author: msg.sender_id,
@@ -66,10 +66,10 @@ function Chat() {
         time: msg.created_at
       }
       // console.log(messageData);
-      if(msg.sender_id!==undefined && msg.receiver_id!==undefined){
-        setMessageList((list)=>[...list, messageData])
+      if (msg.sender_id !== undefined && msg.receiver_id !== undefined) {
+        setMessageList((list) => [...list, messageData])
       }
-      
+
     }
   }, [pastMsgs])
 
@@ -85,49 +85,54 @@ function Chat() {
 
 
   return (
-    <motion.div className="chat-window" initial={{opacity:0}}
-    animate={{opacity:1}}
-    exit={{opacity:0}}>
-      <div className="chat-header">
-        <p>Live Chat</p>
-      </div>
-      <div className="chat-body">
-        <ScrollToBottom className="message-container">
-          {messageList.map((messageContent) => {
-            return (
-              <div
-                className="message"
-                id={sender === messageContent.author ? "you" : "other"}
-              >
-                <div>
-                  <div className="message-content">
-                    <p>{messageContent.message}</p>
-                  </div>
-                  <div className="message-meta">
-                    <p id="time">{messageContent.time}</p>
-                    <p id="author">{messageContent.author}</p>
+    <motion.div className="w-screen h-screen flex items-center justify-center"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}>
+      <motion.div className="chat-window w-[60%] h-[90%]"
+      >
+        <div className="chat-header">
+          <p>Live Chat</p>
+        </div>
+        <div className="chat-body">
+          <ScrollToBottom className="message-container">
+            {messageList.map((messageContent) => {
+              return (
+                <div
+                  className="message"
+                  id={sender === messageContent.author ? "you" : "other"}
+                >
+                  <div>
+                    <div className="message-content">
+                      <p>{messageContent.message}</p>
+                    </div>
+                    <div className="message-meta">
+                      <p id="time">{messageContent.time}</p>
+                      <p id="author">{messageContent.author}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
-        </ScrollToBottom>
-      </div>
-      <div className="chat-footer">
-        <input
-          type="text"
-          value={currentMessage}
-          placeholder="Hey..."
-          onChange={(event) => {
-            setCurrentMessage(event.target.value);
-          }}
-          onKeyPress={(event) => {
-            event.key === "Enter" && sendMessage();
-          }}
-        />
-        <button onClick={sendMessage}>&#9658;</button>
-      </div>
+              );
+            })}
+          </ScrollToBottom>
+        </div>
+        <div className="chat-footer">
+          <input
+            type="text"
+            value={currentMessage}
+            placeholder="Hey..."
+            onChange={(event) => {
+              setCurrentMessage(event.target.value);
+            }}
+            onKeyPress={(event) => {
+              event.key === "Enter" && sendMessage();
+            }}
+          />
+          <button onClick={sendMessage}>&#9658;</button>
+        </div>
+      </motion.div>
     </motion.div>
+
   );
 }
 

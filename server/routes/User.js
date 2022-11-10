@@ -45,7 +45,7 @@ router.post("/login", (req, res) => {
             if (response) {
               //   const id = result[0].id;
               req.session.user = result;
-              console.log("hi", req.session.user);
+              // console.log("hi", req.session.user);
               res.json({ auth: true, result: result });
             } else {
               res.json({
@@ -76,7 +76,7 @@ router.get("/login", (req, res) => {
 router.get("/:id", (req, res) => {
   const { id } = req.params;
   db.query("SELECT * FROM users WHERE id = ?", [id], (err, result) => {
-    console.log("MAAKIHU", result);
+    // console.log("MAAKIHU", result);
     res.send(result[0]);
   });
 });

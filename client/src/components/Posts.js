@@ -12,6 +12,7 @@ import Comment from "./Comment";
 import "./Posts.css";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import {motion} from "framer-motion"
 
 const resolveAfter3Sec = new Promise(resolve => setTimeout(resolve, 3000));
 
@@ -181,7 +182,10 @@ function Posts(props) {
       <div className="relative text-center justify-center border-solid border-2">
         {/* <h1 className="text-4xl mb-4 mt-8 mb-6">YOUR POSTS</h1> */}
         {posts.map((post) => (
-          <div key={post.id}>
+          <motion.div key={post.id} 
+          initial={{x: -1, opacity: 0 }}
+          animate={{x: 0, opacity: 1 }}
+          exit={{ opacity: 0 }}>
             <div className="mt-2 container mx-auto text-left md:w-1/2 md:min-h-10 md:max-h-50 border-solid border-2 mb-10 p-2 rounded-lg">
               <div className="h-10 bg-slate-200 p-2 flex items-center flow-root">
                 <a
@@ -291,7 +295,7 @@ function Posts(props) {
                 {comment === post.id && <Comment post_id={post.id}></Comment>}
               </div>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </>

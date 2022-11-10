@@ -80,8 +80,8 @@ export default function InputPost() {
       .catch((err) => {
         console.log(err);
       });
-
-
+      setPost("");
+    
   };
 
   return (
@@ -91,8 +91,8 @@ export default function InputPost() {
         <TextareaAutosize
           maxRows={10}
           aria-label="maximum height"
-          placeholder="Maximum 10 rows"
-          defaultValue=""
+          placeholder="Enter text..."
+          value={post}
           style={{ width: 1000, height: 200 }}
           onChange={postHandler}
           className="border-solid border-2 focus:outline-none p-3 rounded-xl"

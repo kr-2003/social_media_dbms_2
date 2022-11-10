@@ -25,7 +25,6 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 400,
   bgcolor: "background.paper",
-  border: "2px solid #000",
   boxShadow: 24,
   p: 4,
 };
@@ -194,20 +193,11 @@ export default function Profile() {
           <div class="relative">
             {" "}
             <div class="w-48 h-48 bg-indigo-100 mx-auto rounded-full shadow-2xl absolute inset-x-0 top-0 -mt-24 flex items-center justify-center text-indigo-500">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-24 w-24"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                {" "}
-                <path
-                  fill-rule="evenodd"
-                  d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                  clip-rule="evenodd"
-                />
-              </svg>{" "}
+              <img className="h-[100%] w-[100%] bg-slate-300 rounded-full object-cover bg-red-800" src={userPro.profile_pic_url}></img>
             </div>{" "}
+            {/* <div className="h-[300px] w-[300px] bg-slate-300 rounded-full bg-red-800">
+              
+            </div> */}
           </div>{" "}
           {user.id !== userPro.id && (
             <div class="space-x-8 flex justify-between mt-32 md:mt-0 md:justify-center">
@@ -253,7 +243,7 @@ export default function Profile() {
         <div class="mt-20 text-center border-b pb-12">
           {" "}
           <h1 class="text-4xl font-medium text-gray-700">
-            {userPro.username}, <span class="font-light text-gray-500">27</span>
+            {userPro.username}
           </h1>{" "}
         </div>
         <div className="w-[100%] flex items-center justify-center">
@@ -265,11 +255,11 @@ export default function Profile() {
 
           {postState === 1 && (
             <Photos user_id={id}
-              
+
             ></Photos>
           )}
           {postState === 2 && (
-              <Bookmarks user_id={id}></Bookmarks>
+            <Bookmarks user_id={id}></Bookmarks>
           )}
 
 
@@ -280,28 +270,25 @@ export default function Profile() {
           onClose={handleClose}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
+          className="border-0 focus:outline-none"
+          disableAutoFocus={true}
         >
-          <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
+          <Box sx={style} className="rounded-md drop-shadow-2xl">
+            <h1 className="text-center font-extrabold text-xl mb-4">
               {arrayType}
-            </Typography>
-            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            </h1>
               <ul>
                 {modalArray.map((user) => (
-                  <li>
+                  <motion.li className="bg-gray-400 rounded-md mb-2" whileHover={{backgroundColor: "rgb(132, 136, 132)", transition: {duration: 0.4}}} >
                     {arrayType === "Followers" && (
-                      <a href={`/user/${user.follower_id}`}>{user.username}</a>
+                      <motion.button className="h-[100%] w-[100%] p-4" onClick={()=>navigate(`/user/${user.follower_id}`)}>{user.username}</motion.button>
                     )}
                     {arrayType === "Followings" && (
-                      <a href={`/user/${user.followee_id}`}>{user.username}</a>
+                      <motion.button className="h-[100%] w-[100%] p-4" onClick={()=>navigate(`/user/${user.followee_id}`)}>{user.username}</motion.button>
                     )}
-                  </li>
+                  </motion.li>
                 ))}
               </ul>
-            </Typography>
-            <Button variant="outlined" color="success">
-              Edit
-            </Button>
           </Box>
         </Modal>
       </div>

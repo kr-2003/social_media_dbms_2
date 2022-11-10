@@ -90,9 +90,9 @@ function Photos({ user_id }) {
                             }}
                         >
                             <Box sx={style}>
-                                <div className='grid grid-cols-3 h-[100%]'>
-                                    <div className='w-[100%] h-[100%] col-span-2 object-cover overflow-scroll'>
-                                        <img className='w-[100%] h-[100%] col-span-2 object-cover overflow-scroll' src={post.post_img}></img>
+                                <div className='grid grid-cols-3 h-[100%] overflow-scroll'>
+                                    <div className='w-[100%] h-[100%] col-span-2 object-cover overflow-hidden'>
+                                        <img className='w-[100%] h-[100%] col-span-2 object-cover overflow-hidden' src={post.post_img}></img>
                                     </div>
                                     <div>
                                         <div className='w-[100%] bg-slate-300 p-2'>
