@@ -6,7 +6,9 @@ import Button from "@mui/material/Button";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
-
+import { motion } from "framer-motion";
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from "react-toastify";
 
 function Login() {
   const navigate = useNavigate();
@@ -28,9 +30,31 @@ function Login() {
       .then((response) => {
         if (!response.data.auth) {
           setLoginStatus(false);
+          toast.warn('Wrong username or password!!', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            });
+            setUsername("");
+            setPassword("");
         } else {
           console.log(response.data);
           setLoginStatus(true);
+          toast.success('Login Successfull!!', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
         }
         console.log(response);
       })
@@ -40,13 +64,17 @@ function Login() {
 
     setLoginStatus(true);
     navigate("/");
+    
     navigate("/");
   };
 
   if (loginStatus) navigate("/");
-
-  return (
-    <div class="main">
+  else {
+    return (
+      <motion.div className="h-screen w-screen flex justify-center items-center" initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}>
+      <div class="main">
       <div class="login-box">
         <h1>LOGIN</h1>
         <form>
@@ -68,7 +96,11 @@ function Login() {
         </form>
       </div>
     </div>
-  );
+      </motion.div>
+    );
+  }
+
+
 }
 
 export default Login;

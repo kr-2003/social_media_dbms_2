@@ -4,10 +4,6 @@
     color: white;
 
 }
-@font-face{
-    font-family: 'Merianda';
-    src: url("../fontsMerianda.ttf")format('woff2');
-}
 .homepage{
     width: 100%;
     height: 100vh;

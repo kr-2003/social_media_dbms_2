@@ -13,6 +13,7 @@ import { motion } from "framer-motion";
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import "./Register.css";
 function Register() {
   const [usernameReg, setUsernameReg] = useState("");
   const [passwordReg, setPasswordReg] = useState("");
@@ -147,7 +148,49 @@ function Register() {
     <motion.div className="h-screen w-screen flex justify-center items-center" initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}>
-      <div className="registration h-100 w-98 align-content-center bg-zinc-300 p-10 bg-opacity-25 rounded-md">
+        <div class="mainn"></div>
+        <div class="register-box">
+        <h2>Register</h2>
+        <form>
+            <div class="user-box">
+                <input type="text" name="" required=""onChange={firstNameRegHandler}
+            value={firstNameReg}/>
+                <label>First Name</label>
+              </div>
+              <div class="user-box">
+                <input type="text" name="" required="" onChange={lastNameRegHandler}
+            value={lastNameReg}/>
+                <label>Last Name</label>
+              </div>
+              <div class="user-box">
+                <input type="email" name="" required=""  onChange={emailRegHandler}
+            value={emailReg}/>
+                <label>Email</label>
+              </div>
+              <div class="user-box">
+                <input type="date"/>
+                <label>Date of birth</label>
+              </div>
+          <div class="user-box">
+            <input type="text" name="" required=""onChange={usernameRegHandler}
+            value={usernameReg}/>
+            <label>Username</label>
+          </div>
+          <div class="user-box">
+            <input type="password" name="" required="" onChange={passwordRegHandler}
+            value={passwordReg}/>
+            <label>Password</label>
+          </div>
+          <button  onClick={register}>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            Register
+          </button>
+        </form>
+      </div>
+      {/* <div className="registration h-100 w-98 align-content-center bg-zinc-300 p-10 bg-opacity-25 rounded-md">
         <h1 className="text-5xl mb-8">Registration</h1>
         <Stack spacing={3} className="stack-div">
           <TextField
@@ -203,7 +246,7 @@ function Register() {
             Register
           </Button>
         </Stack>
-      </div>
+      </div> */}
     </motion.div>
   );
 }

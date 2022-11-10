@@ -180,7 +180,7 @@ function Posts(props) {
   return (
     <>
       <div className="relative text-center justify-center border-solid border-2">
-        <h1 className="text-4xl mb-4 mt-8 mb-6">POSTS</h1>
+        <h1 className="text-4xl mb-4 mt-8 mb-6 text-gray-800">POSTS</h1>
         {posts.map((post) => (
           <motion.div key={post.id} 
           initial={{x: -1, opacity: 0 }}

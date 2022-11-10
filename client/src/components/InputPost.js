@@ -88,7 +88,7 @@ export default function InputPost() {
   return (
     <>
       <div className="relative text-center justify-center mt-10 -z-0">
-        <h1 className="text-4xl mb-4">CREATE A POST</h1>
+        <h1 className="text-4xl mb-4 text-gray-800">CREATE A POST</h1>
         <TextareaAutosize
           maxRows={10}
           aria-label="maximum height"
