@@ -3,5 +3,5 @@
     background-color:  #141e30;
 }
 ion-icon{
-    color: white;
+    color: white !important;
 }

@@ -59,7 +59,7 @@ function Navmenu() {
         <div className="md:flex items-center justify-between colo py-4 md:px-10 px-7">
           <div className="font-bold text-2xl cursor-pointer flex items-center text-gray-800">
             <span className="text-3xl text-cyan-900 mr-1">
-              <ion-icon name="logo-wechat"></ion-icon>
+              <ion-icon name="logo-wechat" className="kk"></ion-icon>
               <h1 className="inline ii">AK</h1>
             </span>
           </div>
