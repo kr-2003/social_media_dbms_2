@@ -21,7 +21,7 @@ It is a responsive website that allows different users to create profile, login,
 - All posts of users that you follow at one dashboard
 
 ## Screenshots
-[![Watch the video](https://img.youtube.com/vi/udZMaxeTMCo/maxresdefault.jpg)]
+[![Watch the video](https://youtu.be/udZMaxeTMCo)
 
 
 ***
