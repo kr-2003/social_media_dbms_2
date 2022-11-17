@@ -21,8 +21,8 @@ It is a responsive website that allows different users to create profile, login,
 - All posts of users that you follow at one dashboard
 
 ## Screenshots
+[![Watch the video](https://res.cloudinary.com/abhi9av/video/upload/v1668708892/DBIS_3_eayeyj.mp4)
 
-![](https://res.cloudinary.com/abhi9av/video/upload/v1668708892/DBIS_3_eayeyj.mp4)
 ***
 
 ## Tech Stack
