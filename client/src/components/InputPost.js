@@ -6,11 +6,11 @@ import Axios from "axios";
 import Button from "./Button";
 import uuid from "react-uuid";
 import { toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import "./Posts.css";
 
-const resolveAfter3Sec = new Promise(resolve => setTimeout(resolve, 3000));
+const resolveAfter3Sec = new Promise((resolve) => setTimeout(resolve, 3000));
 
 export default function InputPost() {
   Axios.defaults.withCredentials = true;
@@ -53,18 +53,13 @@ export default function InputPost() {
       });
   };
   const savePost = async () => {
-
     if (image !== "") {
-      toast.promise(
-        resolveAfter3Sec,
-        {
-          pending: 'Uploading!',
-          success: 'Uploaded!! 👌',
-          error: 'Promise rejected 🤯'
-        }
-      )
+      toast.promise(resolveAfter3Sec, {
+        pending: "Uploading!",
+        success: "Uploaded!! 👌",
+        error: "Promise rejected 🤯",
+      });
       await uploadImage(image);
-
     }
     console.log(imageUrl);
     console.log(imgUrl);
@@ -72,17 +67,14 @@ export default function InputPost() {
       post_content: post,
       post_img: imgUrl,
       created_at: String(new Date()),
-
     })
       .then((response) => {
         console.log(response);
-
       })
       .catch((err) => {
         console.log(err);
       });
-      setPost("");
-    
+    setPost("");
   };
 
   return (

@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useLocation,
+} from "react-router-dom";
 import Home from "./Pages/Home";
 import Navmenu from "./components/Navmenu";
 import Register from "./Pages/Register";
@@ -12,11 +17,10 @@ import SearchBar from "./components/SearchBar";
 import "./App.css";
 import io from "socket.io-client";
 import AnimatedRoutes from "./components/AnimatedRoutes";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 // import Homepage from "./Pages/Homepage";
 const socket = io.connect("http://localhost:3001");
-
 
 export const AppContext = createContext();
 
@@ -41,7 +45,6 @@ function App() {
 
   return (
     <AppContext.Provider value={{ loginStatus, setLoginStatus, user, setUser }}>
-
       <Router>
         <Navmenu></Navmenu>
         <AnimatedRoutes></AnimatedRoutes>

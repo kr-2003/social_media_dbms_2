@@ -10,7 +10,7 @@ import dayjs from "dayjs";
 import Axios from "axios";
 import { AppContext } from "../App";
 import { motion } from "framer-motion";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import "./Register.css";
@@ -46,7 +46,14 @@ function Register() {
     setEmailReg(e.target.value);
   };
   const register = () => {
-    if (firstNameReg !== "" && lastNameReg !== "" && usernameReg !== "" && passwordReg != "" && value !== "" && emailReg !== "") {
+    if (
+      firstNameReg !== "" &&
+      lastNameReg !== "" &&
+      usernameReg !== "" &&
+      passwordReg != "" &&
+      value !== "" &&
+      emailReg !== ""
+    ) {
       Axios.post("http://localhost:3001/user/register", {
         firstName: firstNameReg,
         lastName: lastNameReg,
@@ -62,7 +69,7 @@ function Register() {
           console.log(err);
         });
 
-      toast.success('Registration Successfull!!', {
+      toast.success("Registration Successfull!!", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -79,10 +86,10 @@ function Register() {
       setLastNameReg("");
       setEmailReg("");
 
-      navigate("/login")
+      navigate("/login");
     } else {
       if (firstNameReg === "") {
-        toast.warn('Please enter first name!!', {
+        toast.warn("Please enter first name!!", {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -94,7 +101,7 @@ function Register() {
         });
       }
       if (lastNameReg === "") {
-        toast.warn('Please enter last name!!', {
+        toast.warn("Please enter last name!!", {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -106,7 +113,7 @@ function Register() {
         });
       }
       if (usernameReg === "") {
-        toast.warn('Please enter username!!', {
+        toast.warn("Please enter username!!", {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -118,7 +125,7 @@ function Register() {
         });
       }
       if (passwordReg === "") {
-        toast.warn('Please enter password!!', {
+        toast.warn("Please enter password!!", {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -130,7 +137,7 @@ function Register() {
         });
       }
       if (emailReg === "") {
-        toast.warn('Please enter email!!', {
+        toast.warn("Please enter email!!", {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -142,46 +149,73 @@ function Register() {
         });
       }
     }
-
   };
   return (
-    <motion.div className="h-screen w-screen flex justify-center items-center" initial={{ opacity: 0 }}
+    <motion.div
+      className="h-screen w-screen flex justify-center items-center"
+      initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}>
-        <div class="mainn"></div>
-        <div class="register-box">
+      exit={{ opacity: 0 }}
+    >
+      <div class="mainn"></div>
+      <div class="register-box">
         <h2>Register</h2>
         <form>
-            <div class="user-box">
-                <input type="text" name="" required=""onChange={firstNameRegHandler}
-            value={firstNameReg}/>
-                <label>First Name</label>
-              </div>
-              <div class="user-box">
-                <input type="text" name="" required="" onChange={lastNameRegHandler}
-            value={lastNameReg}/>
-                <label>Last Name</label>
-              </div>
-              <div class="user-box">
-                <input type="email" name="" required=""  onChange={emailRegHandler}
-            value={emailReg}/>
-                <label>Email</label>
-              </div>
-              <div class="user-box">
-                <input type="date"/>
-                <label>Date of birth</label>
-              </div>
           <div class="user-box">
-            <input type="text" name="" required=""onChange={usernameRegHandler}
-            value={usernameReg}/>
+            <input
+              type="text"
+              name=""
+              required=""
+              onChange={firstNameRegHandler}
+              value={firstNameReg}
+            />
+            <label>First Name</label>
+          </div>
+          <div class="user-box">
+            <input
+              type="text"
+              name=""
+              required=""
+              onChange={lastNameRegHandler}
+              value={lastNameReg}
+            />
+            <label>Last Name</label>
+          </div>
+          <div class="user-box">
+            <input
+              type="email"
+              name=""
+              required=""
+              onChange={emailRegHandler}
+              value={emailReg}
+            />
+            <label>Email</label>
+          </div>
+          <div class="user-box">
+            <input type="date" />
+            <label>Date of birth</label>
+          </div>
+          <div class="user-box">
+            <input
+              type="text"
+              name=""
+              required=""
+              onChange={usernameRegHandler}
+              value={usernameReg}
+            />
             <label>Username</label>
           </div>
           <div class="user-box">
-            <input type="password" name="" required="" onChange={passwordRegHandler}
-            value={passwordReg}/>
+            <input
+              type="password"
+              name=""
+              required=""
+              onChange={passwordRegHandler}
+              value={passwordReg}
+            />
             <label>Password</label>
           </div>
-          <button  onClick={register}>
+          <button onClick={register}>
             <span></span>
             <span></span>
             <span></span>

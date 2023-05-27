@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import ScrollToBottom from "react-scroll-to-bottom";
 import Axios from "axios";
 import { useParams } from "react-router-dom";
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 import CircularJSON from "circular-json";
 import io from "socket.io-client";
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
 const socket = io.connect("http://localhost:3001");
 
 function Chat() {
@@ -19,7 +19,7 @@ function Chat() {
   // console.log(socket);
   useEffect(() => {
     socket.emit("join_room", room);
-  }, [])
+  }, []);
 
   const sendMessage = async () => {
     if (currentMessage !== "") {
@@ -40,21 +40,20 @@ function Chat() {
     }
   };
 
-
   useEffect(() => {
-    Axios.get(`http://localhost:3001/get_msgs/${sender}/${receiver}`).then((response) => {
-      console.log(response)
-      setPastMsgs(response.data);
-    }).catch(err => {
-      console.log(err);
-    })
-
-
+    Axios.get(`http://localhost:3001/get_msgs/${sender}/${receiver}`)
+      .then((response) => {
+        console.log(response);
+        setPastMsgs(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   useEffect(() => {
-    console.log("Tanwish is legend!!")
-    console.log(pastMsgs)
+    console.log("Tanwish is legend!!");
+    console.log(pastMsgs);
     for (let i = 0; i < pastMsgs.length; i++) {
       const msg = pastMsgs[i];
 
@@ -63,17 +62,14 @@ function Chat() {
         author: msg.sender_id,
         receiver: msg.receiver_id,
         message: msg.message,
-        time: msg.created_at
-      }
+        time: msg.created_at,
+      };
       // console.log(messageData);
       if (msg.sender_id !== undefined && msg.receiver_id !== undefined) {
-        setMessageList((list) => [...list, messageData])
+        setMessageList((list) => [...list, messageData]);
       }
-
     }
-  }, [pastMsgs])
-
-
+  }, [pastMsgs]);
 
   useEffect(() => {
     socket.on("receive_message", (data) => {
@@ -82,15 +78,14 @@ function Chat() {
     });
   }, []);
 
-
-
   return (
-    <motion.div className="w-screen h-screen flex items-center justify-center"
+    <motion.div
+      className="w-screen h-screen flex items-center justify-center"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}>
-      <motion.div className="chat-window w-[60%] h-[90%]"
-      >
+      exit={{ opacity: 0 }}
+    >
+      <motion.div className="chat-window w-[60%] h-[90%]">
         <div className="chat-header">
           <p>Live Chat</p>
         </div>
@@ -132,7 +127,6 @@ function Chat() {
         </div>
       </motion.div>
     </motion.div>
-
   );
 }
 

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import Axios from "axios";
 import { AppContext } from "../App";
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
 
 function EditProfile() {
   const { loginStatus, user } = useContext(AppContext);
@@ -52,7 +52,7 @@ function EditProfile() {
   };
   const profileImageHandler = (e) => {
     setProfileImage(e.target.files[0]);
-  }
+  };
 
   let imgUrl = "";
 
@@ -82,9 +82,9 @@ function EditProfile() {
         console.log(err);
       });
     await Axios.post(`http://localhost:3001/upload/image/${user.id}`, {
-      profile_pic_url: imgUrl
-    })
-  }
+      profile_pic_url: imgUrl,
+    });
+  };
 
   useEffect(() => {
     // console.log(user.username);
@@ -120,14 +120,20 @@ function EditProfile() {
   //       });
   //   });
   return (
-    <motion.div className="h-screen w-[100%] place-items-center h-screen flex items-center justify-center mt-0 sm:mt-20" initial={{ opacity: 0 }}
+    <motion.div
+      className="h-screen w-[100%] place-items-center h-screen flex items-center justify-center mt-0 sm:mt-20"
+      initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}>
+      exit={{ opacity: 0 }}
+    >
       <div className="grid md:grid-cols-3 w-[50%]">
         <div className="col-span-1">
           <div>
             <div className="h-[200px] w-[200px] bg-slate-300 rounded-full bg-red-800 mb-10">
-              <img className="h-[200px] w-[200px] bg-slate-300 rounded-full object-cover bg-red-800" src={image}></img>
+              <img
+                className="h-[200px] w-[200px] bg-slate-300 rounded-full object-cover bg-red-800"
+                src={image}
+              ></img>
             </div>
             <input
               type="file"
@@ -141,14 +147,19 @@ function EditProfile() {
              "
               onChange={profileImageHandler}
             />
-            <button className="border-2 text-sm text-slate-500
+            <button
+              className="border-2 text-sm text-slate-500
                 py-4 px-20
                 rounded-full border-0
                 text-sm font-semibold
                 bg-violet-50 text-violet-700
                 hover:bg-violet-100 justify-center
                 mb-10
-                " onClick={uploadImage}>Upload</button>
+                "
+              onClick={uploadImage}
+            >
+              Upload
+            </button>
           </div>
         </div>
         <div className="w-[100%] border-2 rounded-lg col-span-2 p-3">
@@ -238,7 +249,6 @@ function EditProfile() {
           </button>
         </div>
       </div>
-
     </motion.div>
   );
 }

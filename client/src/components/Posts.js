@@ -11,11 +11,10 @@ import TextareaAutosize from "@mui/material/TextareaAutosize";
 import Comment from "./Comment";
 import "./Posts.css";
 import { toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
-import {motion} from "framer-motion"
+import "react-toastify/dist/ReactToastify.css";
+import { motion } from "framer-motion";
 
-const resolveAfter3Sec = new Promise(resolve => setTimeout(resolve, 3000));
-
+const resolveAfter3Sec = new Promise((resolve) => setTimeout(resolve, 3000));
 
 const style = {
   position: "absolute",
@@ -60,8 +59,6 @@ function Posts(props) {
       .catch((err) => {
         console.log(err);
       });
-
-
   };
 
   const unlikeHandler = (postId) => {
@@ -76,8 +73,6 @@ function Posts(props) {
       .catch((err) => {
         console.log(err);
       });
-
-
   };
 
   const handleOpen = (post) => {
@@ -91,7 +86,7 @@ function Posts(props) {
     Axios.get(`http://localhost:3001/delete/post/${postId}`)
       .then((response) => {
         console.log(response);
-        toast.success('Successfully deleted!!', {
+        toast.success("Successfully deleted!!", {
           position: "top-right",
           autoClose: 3000,
           hideProgressBar: false,
@@ -127,23 +122,27 @@ function Posts(props) {
     console.log(postId);
     Axios.post(`http://localhost:3001/bookmark`, {
       post_id: postId,
-      user_id: user.id
-    }).then((response) => {
-      console.log(response)
-    }).catch(err => {
-      console.log(err);
+      user_id: user.id,
     })
-  }
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   const unbookmarkHandler = (postId) => {
     Axios.post(`http://localhost:3001/unbookmark`, {
       post_id: postId,
-      user_id: user.id
-    }).then(response => {
-      console.log(response);
-    }).catch(err => {
-      console.log(err);
+      user_id: user.id,
     })
-  }
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   useEffect(() => {
     Axios.get(`http://localhost:3001/posts/${id}`).then((response) => {
       // console.log(new Date(posts[0].created_at));
@@ -159,9 +158,12 @@ function Posts(props) {
       setLike(response.data);
       // console.log(like);
     }, []);
-    Axios.get(`http://localhost:3001/getBookmarks/${id}`).then((response) => {
-      setBookmarks(response.data);
-    }, [bookmarks])
+    Axios.get(`http://localhost:3001/getBookmarks/${id}`).then(
+      (response) => {
+        setBookmarks(response.data);
+      },
+      [bookmarks]
+    );
     // console.log(posts);
   });
 
@@ -182,10 +184,12 @@ function Posts(props) {
       <div className="relative text-center justify-center border-solid border-2">
         <h1 className="text-4xl mb-4 mt-8 mb-6 text-gray-800">POSTS</h1>
         {posts.map((post) => (
-          <motion.div key={post.id} 
-          initial={{x: -1, opacity: 0 }}
-          animate={{x: 0, opacity: 1 }}
-          exit={{ opacity: 0 }}>
+          <motion.div
+            key={post.id}
+            initial={{ x: -1, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
             <div className="mt-2 bgg container mx-auto text-left md:w-1/2 md:min-h-10 md:max-h-50 border-solid border-2 mb-10 p-2 rounded-lg">
               <div className="h-10 bg-slate-300 p-2 flex items-center flow-root">
                 <a
@@ -207,7 +211,6 @@ function Posts(props) {
                 <div className="inline-grid grid-cols-3 gap-3">
                   {!like.some((item) => item.post_id === post.id) && (
                     <button onClick={() => likeHandler(post.id)}>
-                      
                       <ion-icon size="large" name="heart-outline"></ion-icon>
                     </button>
                   )}
@@ -225,22 +228,25 @@ function Posts(props) {
                   </button>
                   {!bookmarks.some((item) => item.post_id === post.id) && (
                     <button onClick={() => bookmarkHandler(post.id)}>
-                      <ion-icon name="bookmarks-outline" size="large"></ion-icon>
+                      <ion-icon
+                        name="bookmarks-outline"
+                        size="large"
+                      ></ion-icon>
                     </button>
                   )}
-                  {
-                    bookmarks.some((item) => item.post_id === post.id) && (
-                      <button onClick={() => unbookmarkHandler(post.id)}>
-                        <ion-icon name="bookmarks" size="large"></ion-icon>
-                      </button>
-                    )
-                  }
-
-
+                  {bookmarks.some((item) => item.post_id === post.id) && (
+                    <button onClick={() => unbookmarkHandler(post.id)}>
+                      <ion-icon name="bookmarks" size="large"></ion-icon>
+                    </button>
+                  )}
                 </div>
               </div>
               <div className="container mx-auto md:h-1/2">
-                {post.num_likes && (<span className="text-sm mb-6 text-slate-200">{post.num_likes} likes</span>)}
+                {post.num_likes && (
+                  <span className="text-sm mb-6 text-slate-200">
+                    {post.num_likes} likes
+                  </span>
+                )}
 
                 <p className="mt-6 text-white">{post.post_content}</p>
                 {user.id === post.user_id && (
@@ -257,7 +263,6 @@ function Posts(props) {
                     >
                       Delete
                     </button>
-                    
 
                     <Modal
                       open={open}

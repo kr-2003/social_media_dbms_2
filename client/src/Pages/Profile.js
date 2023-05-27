@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Chat from "../components/Chat"
+import Chat from "../components/Chat";
 import { Link } from "react-router-dom";
 import CircularJSON from "circular-json";
 import io from "socket.io-client";
@@ -15,8 +15,6 @@ import { motion } from "framer-motion";
 import Photos from "../components/Photos";
 import Bookmarks from "../components/Bookmarks";
 const socket = io.connect("http://localhost:3001");
-
-
 
 const style = {
   position: "absolute",
@@ -93,8 +91,10 @@ export default function Profile() {
   };
 
   const joinRoomHandler = () => {
-    console.log({ ...socket })
-    navigate(`/chat`, { state: { sender: user.username, receiver: userPro.username, room: room } });
+    console.log({ ...socket });
+    navigate(`/chat`, {
+      state: { sender: user.username, receiver: userPro.username, room: room },
+    });
   };
 
   useEffect(() => {
@@ -151,9 +151,12 @@ export default function Profile() {
     // console.log("followings", followings);
   }, [followings]);
   return (
-    <motion.div class="p-16" initial={{ opacity: 0 }}
+    <motion.div
+      class="p-16"
+      initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}>
+      exit={{ opacity: 0 }}
+    >
       <div class="p-8 bg-white shadow mt-4">
         {" "}
         <div class="grid grid-cols-1 md:grid-cols-3">
@@ -193,7 +196,10 @@ export default function Profile() {
           <div class="relative">
             {" "}
             <div class="w-48 h-48 bg-indigo-100 mx-auto rounded-full shadow-2xl absolute inset-x-0 top-0 -mt-24 flex items-center justify-center text-indigo-500">
-              <img className="h-[100%] w-[100%] bg-slate-300 rounded-full object-cover bg-red-800" src={userPro.profile_pic_url}></img>
+              <img
+                className="h-[100%] w-[100%] bg-slate-300 rounded-full object-cover bg-red-800"
+                src={userPro.profile_pic_url}
+              ></img>
             </div>{" "}
             {/* <div className="h-[300px] w-[300px] bg-slate-300 rounded-full bg-red-800">
               
@@ -247,24 +253,29 @@ export default function Profile() {
           </h1>{" "}
         </div>
         <div className="w-[100%] flex items-center justify-center">
-          <motion.button className={` h-[100%] p-4 hover:bg-slate-200 ${postState === 1 && "bg-slate-400 bg-opacity-[0.3]"}`} onClick={() => setPostState(1)} whileHover={{ transition: { duration: 1 } }}>My Posts</motion.button>
-          <motion.button className={` h-[100%] p-4 hover:bg-slate-200 ${postState === 2 && "bg-slate-400 bg-opacity-[0.3]"}`} onClick={() => setPostState(2)} whileHover={{ transition: { duration: 1 } }}>Bookmarks</motion.button>
+          <motion.button
+            className={` h-[100%] p-4 hover:bg-slate-200 ${
+              postState === 1 && "bg-slate-400 bg-opacity-[0.3]"
+            }`}
+            onClick={() => setPostState(1)}
+            whileHover={{ transition: { duration: 1 } }}
+          >
+            My Posts
+          </motion.button>
+          <motion.button
+            className={` h-[100%] p-4 hover:bg-slate-200 ${
+              postState === 2 && "bg-slate-400 bg-opacity-[0.3]"
+            }`}
+            onClick={() => setPostState(2)}
+            whileHover={{ transition: { duration: 1 } }}
+          >
+            Bookmarks
+          </motion.button>
         </div>
-
         <div className="flex justify-center">
-
-          {postState === 1 && (
-            <Photos user_id={id}
-
-            ></Photos>
-          )}
-          {postState === 2 && (
-            <Bookmarks user_id={id}></Bookmarks>
-          )}
-
-
+          {postState === 1 && <Photos user_id={id}></Photos>}
+          {postState === 2 && <Bookmarks user_id={id}></Bookmarks>}
         </div>
-
         <Modal
           open={open}
           onClose={handleClose}
@@ -277,18 +288,34 @@ export default function Profile() {
             <h1 className="text-center font-extrabold text-xl mb-4">
               {arrayType}
             </h1>
-              <ul>
-                {modalArray.map((user) => (
-                  <motion.li className="bg-gray-400 rounded-md mb-2" whileHover={{backgroundColor: "rgb(132, 136, 132)", transition: {duration: 0.4}}} >
-                    {arrayType === "Followers" && (
-                      <motion.button className="h-[100%] w-[100%] p-4" onClick={()=>navigate(`/user/${user.follower_id}`)}>{user.username}</motion.button>
-                    )}
-                    {arrayType === "Followings" && (
-                      <motion.button className="h-[100%] w-[100%] p-4" onClick={()=>navigate(`/user/${user.followee_id}`)}>{user.username}</motion.button>
-                    )}
-                  </motion.li>
-                ))}
-              </ul>
+            <ul>
+              {modalArray.map((user) => (
+                <motion.li
+                  className="bg-gray-400 rounded-md mb-2"
+                  whileHover={{
+                    backgroundColor: "rgb(132, 136, 132)",
+                    transition: { duration: 0.4 },
+                  }}
+                >
+                  {arrayType === "Followers" && (
+                    <motion.button
+                      className="h-[100%] w-[100%] p-4"
+                      onClick={() => navigate(`/user/${user.follower_id}`)}
+                    >
+                      {user.username}
+                    </motion.button>
+                  )}
+                  {arrayType === "Followings" && (
+                    <motion.button
+                      className="h-[100%] w-[100%] p-4"
+                      onClick={() => navigate(`/user/${user.followee_id}`)}
+                    >
+                      {user.username}
+                    </motion.button>
+                  )}
+                </motion.li>
+              ))}
+            </ul>
           </Box>
         </Modal>
       </div>

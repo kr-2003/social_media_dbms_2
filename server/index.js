@@ -1,3 +1,5 @@
+import dotenv from "dotenv";
+dotenv.config();
 import express from "express";
 import db from "./config/db.js";
 import userRoute from "./routes/User.js";
@@ -8,6 +10,13 @@ import cookieParser from "cookie-parser";
 import bcrypt from "bcrypt";
 import http from "http";
 import { Server } from "socket.io";
+import fs from "fs";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+import path from "path";
+const PORT = process.env.NODE_DOCKER_PORT;
 const saltRounds = 10;
 const app = express();
 app.use(
@@ -36,10 +45,14 @@ io.on("connection", (socket) => {
 
   socket.on("send_message", (data) => {
     socket.to(data.room).emit("receive_message", data);
-    db.query("INSERT INTO chat_msgs (sender_id, receiver_id, message, created_at) VALUES (?, ?, ?, ?)", [data.author, data.receiver, data.message, data.time], (err, results)=>{
-      if(err) console.log(err);
-      else console.log(results);
-    })
+    db.query(
+      "INSERT INTO chat_msgs (sender_id, receiver_id, message, created_at) VALUES (?, ?, ?, ?)",
+      [data.author, data.receiver, data.message, data.time],
+      (err, results) => {
+        if (err) console.log(err);
+        else console.log(results);
+      }
+    );
   });
 
   socket.on("disconnect", () => {
@@ -63,6 +76,14 @@ app.use(
 );
 
 app.use("/user", userRoute);
+
+app.get("/", (req, res) => {
+  res.send("HEllo from docker!");
+  db.query("SHOW TABLES", (err, result) => {
+    console.log(err);
+    console.log(result);
+  });
+});
 
 app.post("/post", (req, res) => {
   // console.log(req.session.user);
@@ -329,88 +350,120 @@ app.get("/getUsername/:id", (req, res) => {
   });
 });
 
-app.get("/get_sender_msgs/:sender/:receiver", (req, res)=>{
-  const {sender, receiver} = req.params;
-  db.query("SELECT * FROM chat_msgs WHERE sender_id = ? AND receiver_id = ?", [sender, receiver], (err, result)=>{
-    if(err) console.log(err);
-    else res.send(result);
-  })
+app.get("/get_sender_msgs/:sender/:receiver", (req, res) => {
+  const { sender, receiver } = req.params;
+  db.query(
+    "SELECT * FROM chat_msgs WHERE sender_id = ? AND receiver_id = ?",
+    [sender, receiver],
+    (err, result) => {
+      if (err) console.log(err);
+      else res.send(result);
+    }
+  );
 });
 
-app.get("/get_receiver_msgs/:sender/:receiver", (req, res)=>{
-  const {sender, receiver} = req.params;
-  db.query("SELECT * FROM chat_msgs WHERE sender_id = ? AND receiver_id = ?", [receiver, sender], (err, result)=>{
-    if(err) console.log(err);
-    else res.send(result[0]);
-  })
+app.get("/get_receiver_msgs/:sender/:receiver", (req, res) => {
+  const { sender, receiver } = req.params;
+  db.query(
+    "SELECT * FROM chat_msgs WHERE sender_id = ? AND receiver_id = ?",
+    [receiver, sender],
+    (err, result) => {
+      if (err) console.log(err);
+      else res.send(result[0]);
+    }
+  );
 });
 
-app.post("/bookmark", (req, res)=>{
+app.post("/bookmark", (req, res) => {
   const post_id = req.body.post_id;
   const user_id = req.body.user_id;
-  db.query("INSERT INTO bookmarks (post_id, user_id) VALUES (?, ?)", [post_id, user_id], (err, result)=>{
-    if(err) console.log(err);
-    else console.log(result);
-  })
-})
+  db.query(
+    "INSERT INTO bookmarks (post_id, user_id) VALUES (?, ?)",
+    [post_id, user_id],
+    (err, result) => {
+      if (err) console.log(err);
+      else console.log(result);
+    }
+  );
+});
 
-app.post("/unbookmark", (req, res)=>{
+app.post("/unbookmark", (req, res) => {
   const post_id = req.body.post_id;
   const user_id = req.body.user_id;
-  db.query("DELETE FROM bookmarks WHERE post_id = ? AND user_id = ?", [post_id, user_id], (err, result)=>{
-    if(err) console.log(err);
-    else console.log(result);
-  })
+  db.query(
+    "DELETE FROM bookmarks WHERE post_id = ? AND user_id = ?",
+    [post_id, user_id],
+    (err, result) => {
+      if (err) console.log(err);
+      else console.log(result);
+    }
+  );
 });
 
-app.get("/only_posts/:id", (req, res)=>{
-  const {id} = req.params;
-  db.query("SELECT * FROM posts WHERE user_id = ?", [id], (err, results)=>{
-    if(err) console.log(err);
+app.get("/only_posts/:id", (req, res) => {
+  const { id } = req.params;
+  db.query("SELECT * FROM posts WHERE user_id = ?", [id], (err, results) => {
+    if (err) console.log(err);
     else res.send(results);
-  })
+  });
 });
 
-app.get("/allComments/:id", (req, res)=>{
-  const {id} = req.params;
-  db.query("SELECT * FROM comments WHERE post_id IN (SELECT post_id from posts WHERE user_id = ?)", [id], (err, results)=>{
-    if(err) console.log(err);
-    else {
-      // console.log(results);
-      res.send(results);
+app.get("/allComments/:id", (req, res) => {
+  const { id } = req.params;
+  db.query(
+    "SELECT * FROM comments WHERE post_id IN (SELECT post_id from posts WHERE user_id = ?)",
+    [id],
+    (err, results) => {
+      if (err) console.log(err);
+      else {
+        // console.log(results);
+        res.send(results);
+      }
     }
-  })
- });
-
-app.get("/bookmarks/:id", (req, res)=>{
-  const {id} = req.params;
-  db.query("SELECT * FROM posts WHERE id IN (SELECT post_id FROM bookmarks WHERE user_id = ?)", [id], (err, results)=>{
-    if(err) console.log(err);
-    else res.send(results);
-  })
+  );
 });
 
-app.get("/get_msgs/:sender/:receiver", (req, res)=>{
-  const {sender, receiver} = req.params;
-  db.query("SELECT * FROM chat_msgs WHERE (sender_id = ? AND receiver_id = ?) OR (sender_id = ? AND receiver_id = ?)", [sender, receiver, receiver, sender], (err, result)=>{
-    if(err) console.log(err);
-    else {
-      // console.log(result);
-      res.send(result);
+app.get("/bookmarks/:id", (req, res) => {
+  const { id } = req.params;
+  db.query(
+    "SELECT * FROM posts WHERE id IN (SELECT post_id FROM bookmarks WHERE user_id = ?)",
+    [id],
+    (err, results) => {
+      if (err) console.log(err);
+      else res.send(results);
     }
-  })
-})
+  );
+});
 
-app.post("/upload/image/:id", (req, res)=>{
-  const {id} = req.params;
-  db.query("UPDATE users SET profile_pic_url = ? WHERE id = ?", [req.body.profile_pic_url, id], (err, result)=>{
-    if(err) console.log(err);
-    else {
-      // 
+app.get("/get_msgs/:sender/:receiver", (req, res) => {
+  const { sender, receiver } = req.params;
+  db.query(
+    "SELECT * FROM chat_msgs WHERE (sender_id = ? AND receiver_id = ?) OR (sender_id = ? AND receiver_id = ?)",
+    [sender, receiver, receiver, sender],
+    (err, result) => {
+      if (err) console.log(err);
+      else {
+        // console.log(result);
+        res.send(result);
+      }
     }
-  })
-})
+  );
+});
 
-server.listen(3001, (req, res) => {
+app.post("/upload/image/:id", (req, res) => {
+  const { id } = req.params;
+  db.query(
+    "UPDATE users SET profile_pic_url = ? WHERE id = ?",
+    [req.body.profile_pic_url, id],
+    (err, result) => {
+      if (err) console.log(err);
+      else {
+        //
+      }
+    }
+  );
+});
+
+server.listen(PORT, (req, res) => {
   console.log("Listening on port 3001!");
 });

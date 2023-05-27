@@ -28,12 +28,14 @@ function Chat({ socket, sender, receiver, room }) {
   };
 
   useEffect(() => {
-    Axios.get(`http://localhost:3001/get_msgs/${sender}/${receiver}`).then((response) => {
-      console.log(response);
-    }).catch(err => {
-      console.log(err);
-    })
-  })
+    Axios.get(`http://localhost:3001/get_msgs/${sender}/${receiver}`)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
 
   useEffect(() => {
     socket.on("receive_message", (data) => {
@@ -41,8 +43,6 @@ function Chat({ socket, sender, receiver, room }) {
       setMessageList((list) => [...list, data]);
     });
   }, []);
-
-
 
   return (
     <div className="chat-window">
