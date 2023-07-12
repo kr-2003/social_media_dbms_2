@@ -4,19 +4,16 @@ services:
    image: mysql
    command: --default-authentication-plugin=mysql_native_password
    restart: always
-   env_file: ./.env
    environment:
-     - MYSQL_ROOT_PASSWORD=$MYSQLDB_ROOT_PASSWORD
-     - MYSQL_DATABASE=$MYSQLDB_DATABASE
+     MYSQL_ROOT_PASSWORD: root
+     MYSQL_DATABASE: mydb
+     MYSQL_USER: user
+     MYSQL_PASSWORD: user
    ports:
-     - $MYSQLDB_LOCAL_PORT:$MYSQLDB_DOCKER_PORT
+    - 3306:3306
    volumes:
-     - db:/var/lib/mysql
      - ./init:/docker-entrypoint-initdb.d
-   networks:
-      default:
-        aliases:
-          - mysqldb
+
  app:
    depends_on:
      - mysqldb
@@ -27,10 +24,10 @@ services:
      - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
    environment:
      - DB_HOST=mysqldb
-     - DB_USER=$MYSQLDB_USER
-     - DB_PASSWORD=$MYSQLDB_ROOT_PASSWORD
-     - DB_NAME=$MYSQLDB_DATABASE
-     - DB_PORT=$MYSQLDB_DOCKER_PORT
+     - DB_USER=user
+     - DB_PASSWORD=user
+     - DB_NAME=mydb
+     - DB_PORT=3306
    stdin_open: true
    tty: true
    networks:
@@ -50,6 +47,3 @@ services:
       default:
         aliases:
           - frontend
-
-volumes: 
- db:

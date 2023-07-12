@@ -9,9 +9,9 @@ const password = process.env.MYSQLDB_ROOT_PASSWORD;
 const db = mysql.createConnection({
   host: "mysqldb",
   port: PORT,
-  user: user,
-  password: password,
-  database: database,
+  user: "user",
+  password: "user",
+  database: "mydb",
 });
 
 export default db;
