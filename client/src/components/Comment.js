@@ -11,7 +11,7 @@ function Comment(props) {
     setComment(e.target.value);
   };
   const saveComment = () => {
-    Axios.post("http://localhost:3001/post/comment", {
+    Axios.post("http://app/post/comment", {
       post_id: props.post_id,
       comment_body: comment,
       commented_by: user,

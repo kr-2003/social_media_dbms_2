@@ -28,7 +28,7 @@ function Chat({ socket, sender, receiver, room }) {
   };
 
   useEffect(() => {
-    Axios.get(`http://localhost:3001/get_msgs/${sender}/${receiver}`)
+    Axios.get(`http://app/get_msgs/${sender}/${receiver}`)
       .then((response) => {
         console.log(response);
       })

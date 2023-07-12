@@ -48,7 +48,7 @@ function Posts(props) {
   };
   const likeHandler = (postId) => {
     setLike((like) => [...like, postId]);
-    Axios.post(`http://localhost:3001/like`, {
+    Axios.post(`http://app/like`, {
       post_id: postId,
       user_id: user.id,
       username: user.username,
@@ -63,7 +63,7 @@ function Posts(props) {
 
   const unlikeHandler = (postId) => {
     setLike((like) => like.filter((filter) => filter !== postId));
-    Axios.post(`http://localhost:3001/unlike`, {
+    Axios.post(`http://app/unlike`, {
       post_id: postId,
       user_id: user.id,
     })
@@ -83,7 +83,7 @@ function Posts(props) {
   const handleClose = () => setOpen(false);
   const deletePost = (postId) => {
     console.log(postId);
-    Axios.get(`http://localhost:3001/delete/post/${postId}`)
+    Axios.get(`http://app/delete/post/${postId}`)
       .then((response) => {
         console.log(response);
         toast.success("Successfully deleted!!", {
@@ -102,7 +102,7 @@ function Posts(props) {
       });
   };
   const editPost = (e) => {
-    Axios.post(`http://localhost:3001/edit/post/${postEdit.id}`, {
+    Axios.post(`http://app/edit/post/${postEdit.id}`, {
       post_content: editContent,
     })
       .then((response) => {
@@ -120,7 +120,7 @@ function Posts(props) {
 
   const bookmarkHandler = (postId) => {
     console.log(postId);
-    Axios.post(`http://localhost:3001/bookmark`, {
+    Axios.post(`http://app/bookmark`, {
       post_id: postId,
       user_id: user.id,
     })
@@ -132,7 +132,7 @@ function Posts(props) {
       });
   };
   const unbookmarkHandler = (postId) => {
-    Axios.post(`http://localhost:3001/unbookmark`, {
+    Axios.post(`http://app/unbookmark`, {
       post_id: postId,
       user_id: user.id,
     })
@@ -144,7 +144,7 @@ function Posts(props) {
       });
   };
   useEffect(() => {
-    Axios.get(`http://localhost:3001/posts/${id}`).then((response) => {
+    Axios.get(`http://app/posts/${id}`).then((response) => {
       // console.log(new Date(posts[0].created_at));
       setPosts(
         response.data.sort(
@@ -154,11 +154,11 @@ function Posts(props) {
         )
       );
     });
-    Axios.get(`http://localhost:3001/getLikes/${id}`).then((response) => {
+    Axios.get(`http://app/getLikes/${id}`).then((response) => {
       setLike(response.data);
       // console.log(like);
     }, []);
-    Axios.get(`http://localhost:3001/getBookmarks/${id}`).then(
+    Axios.get(`http://app/getBookmarks/${id}`).then(
       (response) => {
         setBookmarks(response.data);
       },

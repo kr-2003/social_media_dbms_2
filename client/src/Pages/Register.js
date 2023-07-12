@@ -54,7 +54,7 @@ function Register() {
       value !== "" &&
       emailReg !== ""
     ) {
-      Axios.post("http://localhost:3001/user/register", {
+      Axios.post("http://app/user/register", {
         firstName: firstNameReg,
         lastName: lastNameReg,
         username: usernameReg,
