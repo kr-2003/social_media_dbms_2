@@ -34,7 +34,7 @@ function EditProfile() {
     setUsername(e.target.value);
   };
   const editProfileHandler = () => {
-    Axios.post(`http://app/edit/${user.id}`, {
+    Axios.post(`http://app:3001/edit/${user.id}`, {
       first_name: firstName,
       last_name: lastName,
       email: email,
@@ -81,7 +81,7 @@ function EditProfile() {
       .catch((err) => {
         console.log(err);
       });
-    await Axios.post(`http://app/upload/image/${user.id}`, {
+    await Axios.post(`http://app:3001/upload/image/${user.id}`, {
       profile_pic_url: imgUrl,
     });
   };
@@ -89,7 +89,7 @@ function EditProfile() {
   useEffect(() => {
     // console.log(user.username);
     // setUsername(user.username);
-    Axios.get(`http://app/user/${user.id}`).then((response) => {
+    Axios.get(`http://app:3001/user/${user.id}`).then((response) => {
       setUserDetails(response.data);
     });
     // console.log(userDetails);
@@ -106,7 +106,7 @@ function EditProfile() {
   //   console.log(username);
 
   //   useEffect(() => {
-  //     Axios.post(`http://app/edit/${user.id}`, {
+  //     Axios.post(`http://app:3001/edit/${user.id}`, {
   //       first_name: firstName,
   //       last_name: lastName,
   //       email: email,

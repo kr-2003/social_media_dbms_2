@@ -20,7 +20,7 @@ import AnimatedRoutes from "./components/AnimatedRoutes";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // import Homepage from "./Pages/Homepage";
-const socket = io.connect("http://app");
+const socket = io.connect("http://app:3001");
 
 export const AppContext = createContext();
 
@@ -30,7 +30,7 @@ function App() {
   const [user, setUser] = useState({});
 
   useEffect(() => {
-    Axios.get("http://app/user/login").then((response) => {
+    Axios.get("http://app:3001/user/login").then((response) => {
       if (response.data.loggedIn === true) {
         setLoginStatus(true);
         setUser({

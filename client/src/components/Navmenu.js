@@ -22,7 +22,7 @@ function Navmenu() {
   ];
 
   useEffect(() => {
-    Axios.get(`http://app/getUsername/${user.id}`)
+    Axios.get(`http://app:3001/getUsername/${user.id}`)
       .then((response) => {
         setUsername(response.data.username);
       })
@@ -32,7 +32,7 @@ function Navmenu() {
   });
 
   const logoutHandler = () => {
-    Axios.get("http://app/logout")
+    Axios.get("http://app:3001/logout")
       .then((res) => {
         console.log(res);
       })
@@ -44,7 +44,7 @@ function Navmenu() {
   const [open, setOpen] = useState(false);
   const [userData, setUserData] = useState([]);
   useEffect(() => {
-    Axios.get("http://app/userData")
+    Axios.get("http://app:3001/userData")
       .then((response) => {
         setUserData(response.data);
       })

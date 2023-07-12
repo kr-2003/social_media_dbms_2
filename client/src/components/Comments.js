@@ -5,7 +5,7 @@ import { AppContext } from "../App";
 function Comments(props) {
   const [comments, setComments] = useState([]);
   const { loginStatus, user } = useContext(AppContext);
-  Axios.get(`http://app/comment/${props.post_id}`)
+  Axios.get(`http://app:3001/comment/${props.post_id}`)
     .then((response) => {
       setComments(response.data);
     })

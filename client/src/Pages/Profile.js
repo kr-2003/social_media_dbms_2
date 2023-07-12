@@ -14,7 +14,7 @@ import io from "socket.io-client";
 import { motion } from "framer-motion";
 import Photos from "../components/Photos";
 import Bookmarks from "../components/Bookmarks";
-const socket = io.connect("http://app");
+const socket = io.connect("http://app:3001");
 
 const style = {
   position: "absolute",
@@ -54,7 +54,7 @@ export default function Profile() {
   const handleClose = () => setOpen(false);
 
   useEffect(() => {
-    Axios.get("http://app/user/login").then((response) => {
+    Axios.get("http://app:3001/user/login").then((response) => {
       if (response.data.loggedIn === true) {
         setLoginStatus(true);
       } else {
@@ -65,7 +65,7 @@ export default function Profile() {
   });
 
   const followHandler = () => {
-    Axios.post("http://app/follow", {
+    Axios.post("http://app:3001/follow", {
       followerId: user.id,
       followeeId: userPro.id,
     })
@@ -78,7 +78,7 @@ export default function Profile() {
   };
 
   const unfollowHandler = () => {
-    Axios.post("http://app/unfollow", {
+    Axios.post("http://app:3001/unfollow", {
       followerId: user.id,
       followeeId: userPro.id,
     })
@@ -98,11 +98,11 @@ export default function Profile() {
   };
 
   useEffect(() => {
-    Axios.get(`http://app/user/${id}`).then((response) => {
+    Axios.get(`http://app:3001/user/${id}`).then((response) => {
       setUserPro(response.data);
     });
     console.log(userPro);
-    Axios.get("http://app/user/login").then((response) => {
+    Axios.get("http://app:3001/user/login").then((response) => {
       if (response.data.loggedIn === true) {
         setLoginStatus(true);
         setUser({
@@ -117,7 +117,7 @@ export default function Profile() {
 
   useEffect(() => {
     // console.log(userPro.id, user.id);
-    Axios.get(`http://app/followStatus/${userPro.id}/${user.id}`)
+    Axios.get(`http://app:3001/followStatus/${userPro.id}/${user.id}`)
       .then((response) => {
         if (response.data.followStatus === true) {
           setFollowStatus(true);
@@ -130,7 +130,7 @@ export default function Profile() {
   });
 
   useEffect(() => {
-    Axios.get(`http://app/getFollowers/${userPro.id}`)
+    Axios.get(`http://app:3001/getFollowers/${userPro.id}`)
       .then((response) => {
         setFollowers(response.data);
       })
@@ -141,7 +141,7 @@ export default function Profile() {
     // console.log("followers", followers);
   }, [followers]);
   useEffect(() => {
-    Axios.get(`http://app/getFollowings/${userPro.id}`)
+    Axios.get(`http://app:3001/getFollowings/${userPro.id}`)
       .then((response) => {
         setFollowings(response.data);
       })
