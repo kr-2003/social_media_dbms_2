@@ -36,7 +36,7 @@ function Photos({ user_id }) {
     setOpen(false);
   };
   useEffect(() => {
-    Axios.get(`http://app:3001/only_posts/${user_id}`)
+    Axios.get(`http://localhost:3001/only_posts/${user_id}`)
       .then((response) => {
         setPosts(response.data);
         // console.log(posts);
@@ -47,7 +47,7 @@ function Photos({ user_id }) {
   });
 
   useEffect(() => {
-    Axios.get(`http://app:3001/allComments/${user_id}`)
+    Axios.get(`http://localhost:3001/allComments/${user_id}`)
       .then((response) => {
         setAllComments(response.data);
       })

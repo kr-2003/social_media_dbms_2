@@ -63,7 +63,7 @@ export default function InputPost() {
     }
     console.log(imageUrl);
     console.log(imgUrl);
-    await Axios.post("http://app:3001/post", {
+    await Axios.post("http://localhost:3001/post", {
       post_content: post,
       post_img: imgUrl,
       created_at: String(new Date()),

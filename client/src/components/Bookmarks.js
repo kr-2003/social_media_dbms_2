@@ -36,7 +36,7 @@ function Bookmarks({ user_id }) {
     setOpen(false);
   };
   useEffect(() => {
-    Axios.get(`http://app:3001/bookmarks/${user_id}`)
+    Axios.get(`http://localhost:3001/bookmarks/${user_id}`)
       .then((response) => {
         setPosts(response.data);
         // console.log(posts);
@@ -47,7 +47,7 @@ function Bookmarks({ user_id }) {
   });
 
   useEffect(() => {
-    Axios.get(`http://app:3001/allComments/${user_id}`)
+    Axios.get(`http://localhost:3001/allComments/${user_id}`)
       .then((response) => {
         setAllComments(response.data);
       })

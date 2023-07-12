@@ -12,7 +12,7 @@ function Home() {
   const navigate = useNavigate();
   let login = false;
   useEffect(() => {
-    Axios.get("http://app:3001/user/login").then((response) => {
+    Axios.get("http://localhost:3001/user/login").then((response) => {
       if (response.data.loggedIn === true) {
         setLoginStatus(true);
       } else {

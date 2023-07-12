@@ -6,7 +6,7 @@ import { useLocation } from "react-router-dom";
 import CircularJSON from "circular-json";
 import io from "socket.io-client";
 import { motion } from "framer-motion";
-const socket = io.connect("http://app:3001");
+const socket = io.connect("http://localhost:3001");
 
 function Chat() {
   const [currentMessage, setCurrentMessage] = useState("");
@@ -41,7 +41,7 @@ function Chat() {
   };
 
   useEffect(() => {
-    Axios.get(`http://app:3001/get_msgs/${sender}/${receiver}`)
+    Axios.get(`http://localhost:3001/get_msgs/${sender}/${receiver}`)
       .then((response) => {
         console.log(response);
         setPastMsgs(response.data);
